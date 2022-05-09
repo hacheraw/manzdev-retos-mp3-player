@@ -1,23 +1,19 @@
-# manzdev-retos-titulo
+# manzdev-retos-mp3-player
 
-🌍 **URL del reto**: *https://lenguajejs.com/retos/nivel-facil/basic-card/*
+🌍 **URL del reto**: *https://lenguajejs.com/retos/nivel-medio/mp3-player/*
 
 ## Datos
 
-- 🦄 **Desarrollador/a:** *Nombre*
-- 🐇 **Link a red social:** *https://twitter.com/nombre*
-- 🦾 **Perfil:** *Novato / Bajo / Medio / Avanzado / Experto*
-- 💬 **Un comentario breve o frase ingeniosa**: *-*
+- 🦄 **Desarrollador/a:** *Hache_raw*
+- 🐇 **Link a red social:** *https://twitter.com/hache_raw*
+- 🦾 **Perfil:** *Avanzado*
+- 💬 **Un comentario breve o frase ingeniosa**: *¿Porfa please recubierto de nata?*
 
 ## Observaciones
 
-*Escribe aquí tus observaciones sobre la implementación*
+Sirve como introducción básica a los eventos.
+
+La barra de progreso la he hecho con `<progress></progress>` pero hay que meter demasiado CSS para que los navegadores no la pinten a su manera.
+Seguramente la termine cambiando por un div contenedor e hijo.
 
 > Puedes encontrar otros retos de Manz.dev en: <br>▶ https://lenguajejs.com/retos/
-
----
-*Puedes borrar todo desde esta línea en adelante*
-
----
-
-Recuerda cambiar el título del repo, los datos y desplegar la versión en GitHub Pages e indicar la URL en la esquina superior derecha de tu repositorio de GitHub, junto a una pequeña descripción.

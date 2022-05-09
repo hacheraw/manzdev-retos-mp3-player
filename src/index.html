@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>MP3 Player</title>
   <link rel="stylesheet" href="./index.css">
   <script type="module" src="./index.js"></script>
 </head>
-<body>
 
+<body>
+  <div class="container">
+    <div class="player">
+      <audio src="">
+        Tu navegador no soporta etiquetas "audio"
+      </audio>
+      <div class="cover">
+        <div class="lines"></div>
+        <div class="current-time"></div>
+        <div class="total-time"></div>
+      </div>
+      <div class="info">
+        <h1 class="title"></h1>
+        <h2 class="artist"></h2>
+      </div>
+      <div class="controls">
+        <button class="prev"></button>
+        <button class="play"></button>
+        <button class="next"></button>
+      </div>
+      <div class="lyrics"></div>
+      <progress value="0" max="100"></progress>
+    </div>
+    <div class="list">
+    </div>
+  </div>
 </body>
+
 </html>

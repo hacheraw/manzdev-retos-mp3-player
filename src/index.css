@@ -1,0 +1,107 @@
+@font-face {
+  font-family: RobotoFlex;
+  src:
+    local("RobotoFlex"),
+    url("/assets/fonts/RobotoFlex.woff2") format("woff2 supports variations"),
+    url("/assets/fonts/RobotoFlex.woff2") format("woff2-variations"),
+    url("/assets/fonts/RobotoFlex.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 50% 200%;
+}
+
+:root {
+  --accent-color: #411583;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: RobotoFlex, Roboto, sans-serif;
+  background: #8685a2;
+  background: linear-gradient(45deg, #c1b9d3 0%, #8685a2 100%) no-repeat;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 350px;
+  background: #fff;
+
+  & .cover {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 350px;
+    height: 350px;
+    padding: 0.3rem 1rem;
+    color: #fff;
+    background-image: url("./assets/vinyl.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: fill;
+    box-sizing: border-box;
+
+    & .lines {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      height: 42px;
+
+      & .line {
+        background: #fff9;
+        transition: all 0.5s;
+      }
+    }
+
+    & > :not(.lines) {
+      z-index: 1;
+    }
+  }
+
+  & progress {
+    width: 100%;
+    height: 10px;
+    background: #666;
+
+    &::-webkit-progress-bar {
+      background: #666;
+    }
+
+    &::-webkit-progress-value {
+      background: var(--accent-color);
+    }
+  }
+}
+
+.fancy-text {
+  font-variation-settings:
+    "wght" 400,
+    "wdth" 100,
+    "opsz" 144,
+    "GRAD" 0,
+    "slnt" 0,
+    "XTRA" 323,
+    "XOPQ" 96,
+    "YOPQ" 79,
+    "YTLC" 416,
+    "YTUC" 760,
+    "YTAS" 854,
+    "YTDE" -305,
+    "YTFI" 738;
+}
