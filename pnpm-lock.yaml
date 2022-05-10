@@ -1,4 +1,4 @@
-lockfileVersion: 5.4
+lockfileVersion: 5.3
 
 specifiers:
   '@stylelint/postcss-css-in-js': ^0.37.3
@@ -19,18 +19,18 @@ specifiers:
   vite: ^2.9.5
 
 devDependencies:
-  '@stylelint/postcss-css-in-js': 0.37.3_34hy6nyp6dwic4v7tgylovy2su
+  '@stylelint/postcss-css-in-js': 0.37.3_df0f8f370ff0ec8172bf99b0b7571a95
   eslint: 8.15.0
-  eslint-config-standard: 17.0.0-1_ieavu27etzinl4o7wg3iobxarm
+  eslint-config-standard: 17.0.0-1_41015a6be49e50d5f1dfb1b68706e08b
   eslint-plugin-import: 2.26.0_eslint@8.15.0
   eslint-plugin-n: 14.0.0_eslint@8.15.0
   eslint-plugin-promise: 6.0.0_eslint@8.15.0
   gh-pages: 3.2.3
   postcss: 8.4.13
   postcss-html: 1.4.1
-  postcss-jsx: 0.36.4_34hy6nyp6dwic4v7tgylovy2su
+  postcss-jsx: 0.36.4_df0f8f370ff0ec8172bf99b0b7571a95
   postcss-nesting: 10.1.4_postcss@8.4.13
-  postcss-styled: 0.34.0_34hy6nyp6dwic4v7tgylovy2su
+  postcss-styled: 0.34.0_df0f8f370ff0ec8172bf99b0b7571a95
   postcss-syntax: 0.36.2_postcss@8.4.13
   stylelint: 14.6.1
   stylelint-config-standard: 25.0.0_stylelint@14.6.1
@@ -315,7 +315,7 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@stylelint/postcss-css-in-js/0.37.3_34hy6nyp6dwic4v7tgylovy2su:
+  /@stylelint/postcss-css-in-js/0.37.3_df0f8f370ff0ec8172bf99b0b7571a95:
     resolution: {integrity: sha512-scLk3cSH1H9KggSniseb2KNAU5D9FWc3H7BxCSAIdtU9OWIyw0zkEZ9qEKHryRM+SExYXRKNb7tOOVNAsQ3iwg==}
     peerDependencies:
       postcss: '>=7.0.0'
@@ -1006,7 +1006,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-standard/17.0.0-1_ieavu27etzinl4o7wg3iobxarm:
+  /eslint-config-standard/17.0.0-1_41015a6be49e50d5f1dfb1b68706e08b:
     resolution: {integrity: sha512-aqRG58dqoBNfOLN+PsitasxmW+W9Os4oQrx081B16T4E4WogsSbpUL6hnKSnyv35sSRYA2XjBtKMOrUboL6jgw==}
     peerDependencies:
       eslint: ^8.0.1
@@ -2139,7 +2139,7 @@ packages:
       postcss-safe-parser: 6.0.0_postcss@8.4.13
     dev: true
 
-  /postcss-jsx/0.36.4_34hy6nyp6dwic4v7tgylovy2su:
+  /postcss-jsx/0.36.4_df0f8f370ff0ec8172bf99b0b7571a95:
     resolution: {integrity: sha512-jwO/7qWUvYuWYnpOb0+4bIIgJt7003pgU3P6nETBLaOyBXuTD55ho21xnals5nBrlpTIFodyd3/jBi6UO3dHvA==}
     peerDependencies:
       postcss: '>=5.0.0'
@@ -2187,7 +2187,7 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
-  /postcss-styled/0.34.0_34hy6nyp6dwic4v7tgylovy2su:
+  /postcss-styled/0.34.0_df0f8f370ff0ec8172bf99b0b7571a95:
     resolution: {integrity: sha512-Uaeetr/xOiQWGJgzPFOr32/Bwykpfh9TVE26OpmwDb8eEN205TS/gqkt9ri+C6otQzQKXqbMfeZNbKYi7QpeNA==}
     peerDependencies:
       postcss: '>=5.0.0'

@@ -29,6 +29,9 @@ nextBtn.addEventListener("click", next);
 prevBtn.addEventListener("click", prev);
 progress.addEventListener("click", updateProgress);
 audio.addEventListener("timeupdate", drawCoverInfo);
+audio.addEventListener("play", () => { updateVisibility(true); });
+audio.addEventListener("pause", () => { updateVisibility(false); });
+audio.addEventListener("ended", () => { updateVisibility(false); });
 
 // load song
 function loadSong(song) {
@@ -105,26 +108,20 @@ function updateProgress(e) {
 }
 
 function drawCoverInfo() {
-  if (audio.paused) {
-    drawMinutes(false);
-    drawLines(false);
-    return;
+  if (!audio.paused) {
+    drawMinutes();
+    drawLines();
   }
-  drawMinutes();
-  drawLines();
 }
 
-function drawMinutes(draw = true) {
-  if (!draw) {
-    return;
-  }
+function drawMinutes() {
   const duration = audio.duration;
   const currentTime = audio.currentTime;
   const progressValue = (currentTime / duration) * 100;
   if (currentTime > 0) { // No establecer si progressValue es Infinity
     progress.value = progressValue;
   }
-  console.log(title);
+
   const minutes = String(Math.floor(currentTime / 60)).padStart(2, "0");
   const seconds = String(Math.floor(currentTime % 60)).padStart(2, "0");
   const minutesTotal = String(Math.floor(duration / 60)).padStart(2, "0");
@@ -148,17 +145,19 @@ function createLines() {
   }
 }
 
-function drawLines(draw = true) {
-  if (!draw) {
-    lines.style.display = "none";
-    return;
-  }
-
+function drawLines() {
   lines.style.display = "flex";
   const allLines = lines.querySelectorAll(".line");
   const height = lines.clientHeight;
 
   allLines.forEach((line) => {
     line.style.height = `${Math.random() * height}px`;
+  });
+}
+
+function updateVisibility(isPlaying = true) {
+  console.log(isPlaying);
+  [lines, current, total].forEach((element) => {
+    element.style.opacity = isPlaying ? 1 : 0;
   });
 }
