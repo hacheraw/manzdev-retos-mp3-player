@@ -18,19 +18,26 @@ const bar = progress.querySelector(".bar");
 const current = player.querySelector(".current-time");
 const total = player.querySelector(".total-time");
 const lines = player.querySelector(".lines");
+const listDiv = document.querySelector(".playlist");
+const loopBtn = document.querySelector(".loop");
+const listBtn = document.querySelector(".list");
 
 const HIDE_ON_PAUSE = [lines/*, current, total */]; // Elementos que se ocultarán al pausar
+let LOOP = false; // por defecto no se hace loop
+
+// TODO: deshabilitar botón si no hay más canciones
 
 let currentSongIndex = 0;
 
 // Al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
+  generatePlaylist();
   loadSong(songs[currentSongIndex]);
   createLines();
 });
 
-playBtn.addEventListener("click", audio.play); // * Funciona perfecto
-pauseBtn.addEventListener("click", () => { audio.pause(); }); // ? No funciona si lo llamo como la linea 30
+playBtn.addEventListener("click", () => { audio.play(); });
+pauseBtn.addEventListener("click", () => { audio.pause(); });
 nextBtn.addEventListener("click", next);
 prevBtn.addEventListener("click", prev);
 progress.addEventListener("click", updateProgress);
@@ -38,9 +45,27 @@ audio.addEventListener("timeupdate", drawCoverInfo);
 audio.addEventListener("play", () => { updateVisibility(true); });
 audio.addEventListener("pause", () => { updateVisibility(false); });
 audio.addEventListener("ended", () => { updateVisibility(false); next(); });
+loopBtn.addEventListener("click", () => { LOOP = !LOOP; });
+listBtn.addEventListener("click", () => { listDiv.classList.toggle("show"); });
+
+// Genera la playlist
+function generatePlaylist() {
+  songs.forEach((song, index) => {
+    const div = document.createElement("div");
+    div.textContent = `${song.artist} - ${song.title}`;
+    div.addEventListener("click", () => {
+      currentSongIndex = index;
+      changeSong(song);
+    });
+    listDiv.appendChild(div);
+  });
+}
 
 // Carga una canción
 function loadSong(song) {
+  const listItems = listDiv.querySelectorAll("div");
+  listItems.forEach((item) => { item.classList.remove("active"); });
+  listItems[currentSongIndex].classList.add("active");
   audio.src = song.url;
   cover.style.backgroundImage = `url(./assets/covers/${song.image})`;
   title.textContent = song.title;
@@ -51,6 +76,9 @@ function loadSong(song) {
 
 // Siguiente canción
 function next() {
+  if (!LOOP && currentSongIndex === songs.length - 1) {
+    return; // Es la última
+  }
   if (++currentSongIndex >= songs.length) currentSongIndex = 0; // Si no existe, la primera
   const nextSong = songs[currentSongIndex];
   audio.src = nextSong.url;
@@ -59,6 +87,9 @@ function next() {
 
 // Canción anterior
 function prev() {
+  if (!LOOP && currentSongIndex === 0) {
+    return; // Es la primera
+  }
   if (--currentSongIndex < 0) currentSongIndex = songs.length - 1; // Si no existe, la última
   const prevSong = songs[currentSongIndex];
   audio.src = prevSong.url;

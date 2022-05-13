@@ -25,76 +25,130 @@ body {
   align-items: center;
   justify-content: center;
   font-family: RobotoFlex, Roboto, sans-serif;
+  font-size: 14px;
   background: #8685a2;
   background: linear-gradient(45deg, #c1b9d3 0%, #8685a2 100%) no-repeat;
+  background-attachment: fixed;
 }
 
-.player {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 350px;
-  background: #fff;
+.container {
+  position: relative;
 
-  & .cover {
+  & .player {
     position: relative;
+    z-index: 2;
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 350px;
-    height: 350px;
-    padding: 0.3rem 1rem;
-    color: #fff;
-    background-image: url("./assets/vinyl.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: fill;
-    box-sizing: border-box;
+    background: #fff;
 
-    & .lines {
-      position: absolute;
-      bottom: 0;
-      left: 0;
+    & .cover {
+      position: relative;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      width: 100%;
-      height: 42px;
+      width: 350px;
+      height: 350px;
+      padding: 0.3rem 1rem;
+      color: #fff;
+      background-image: url("./assets/vinyl.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: fill;
+      box-sizing: border-box;
 
-      & .line {
-        background: #fff9;
-        transition: all 0.5s;
+      & .lines {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        width: 100%;
+        height: 42px;
+
+        & .line {
+          background: #fff9;
+          transition: all 0.5s;
+        }
+      }
+
+      & > :not(.lines) {
+        z-index: 1;
       }
     }
 
-    & > :not(.lines) {
-      z-index: 1;
+    & .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      & .pause {
+        display: none;
+      }
+    }
+
+    & .progress {
+      width: 100%;
+      background: #666;
+      cursor: pointer;
+
+      & .bar {
+        height: 10px;
+        width: 0;
+        background: var(--accent-color);
+        pointer-events: none;
+      }
     }
   }
 
-  & .controls {
+  & .playlist {
+    position: absolute;
+    z-index: 1;
+    top: 1rem;
+    right: 0;
+    background: #ececf3;
+    padding: 1rem;
+    counter-reset: playlist-item;
+    transition: all 0.8s ease-out;
+
+    &.show {
+      transform: translateX(100%);
+    }
+
+    & > div {
+      counter-increment: playlist-item;
+      border-bottom: 1px solid #c1b9d3;
+      padding: 0.2rem;
+      cursor: pointer;
+    }
+
+    & > ::before {
+      content: counter(playlist-item) ".";
+      margin-right: 0.5rem;
+
+      &.active {
+        color: var(--accent-color);
+        font-weight: bold;
+      }
+    }
+  }
+
+  & .list-buttons {
+    position: absolute;
+    z-index: 2;
+    top: 0;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-
-    & .pause {
-      display: none;
-    }
-  }
-
-  & .progress {
+    justify-content: space-between;
     width: 100%;
-    background: #666;
-    cursor: pointer;
 
-    & .bar {
-      height: 10px;
-      width: 0;
-      background: var(--accent-color);
-      pointer-events: none;
+    & > button {
+      margin: 1rem;
     }
   }
 }
