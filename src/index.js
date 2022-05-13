@@ -10,103 +10,79 @@ const title = player.querySelector(".title");
 const artist = player.querySelector(".artist");
 const prevBtn = player.querySelector(".prev");
 const playBtn = player.querySelector(".play");
+const pauseBtn = document.querySelector(".pause");
 const nextBtn = player.querySelector(".next");
 const lyrics = player.querySelector(".lyrics");
-const progress = player.querySelector("progress");
+const progress = player.querySelector(".progress");
+const bar = progress.querySelector(".bar");
 const current = player.querySelector(".current-time");
 const total = player.querySelector(".total-time");
 const lines = player.querySelector(".lines");
 
+const HIDE_ON_PAUSE = [lines/*, current, total */]; // Elementos que se ocultarán al pausar
+
 let currentSongIndex = 0;
 
+// Al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
   loadSong(songs[currentSongIndex]);
   createLines();
 });
 
-playBtn.addEventListener("click", togglePlay);
+playBtn.addEventListener("click", audio.play); // * Funciona perfecto
+pauseBtn.addEventListener("click", () => { audio.pause(); }); // ? No funciona si lo llamo como la linea 30
 nextBtn.addEventListener("click", next);
 prevBtn.addEventListener("click", prev);
 progress.addEventListener("click", updateProgress);
 audio.addEventListener("timeupdate", drawCoverInfo);
 audio.addEventListener("play", () => { updateVisibility(true); });
 audio.addEventListener("pause", () => { updateVisibility(false); });
-audio.addEventListener("ended", () => { updateVisibility(false); });
+audio.addEventListener("ended", () => { updateVisibility(false); next(); });
 
-// load song
+// Carga una canción
 function loadSong(song) {
   audio.src = song.url;
   cover.style.backgroundImage = `url(./assets/covers/${song.image})`;
   title.textContent = song.title;
   artist.textContent = song.artist;
-  lyrics.innerHTML = song.lyrics;
+  lyrics.textContent = song.lyrics;
   progress.value = 0;
-  playBtn.innerHTML = "play";
 }
 
-// play and pause
-function togglePlay() {
-  if (audio.paused) {
-    audio.play();
-    playBtn.innerHTML = "pause";
-  } else {
-    audio.pause();
-    playBtn.innerHTML = "play";
-  }
-}
-
-// play next song
+// Siguiente canción
 function next() {
-  const currentSong = songs[currentSongIndex];
-  const nextSong = songs[currentSongIndex + 1];
-  if (nextSong) {
-    audio.src = nextSong.file;
-    cover.style.backgroundImage = `url(${nextSong.cover})`;
-    info.innerHTML = `<h3>${nextSong.title}</h3>
-    <h4>${nextSong.artist}</h4>`;
-    playBtn.innerHTML = "play";
-    currentSongIndex++;
-  } else {
-    audio.src = songs[0].file;
-    cover.style.backgroundImage = `url(${songs[0].cover})`;
-    info.innerHTML = `<h3>${songs[0].title}</h3>
-    <h4>${songs[0].artist}</h4>`;
-    playBtn.innerHTML = "play";
-    currentSongIndex = 0;
-  }
+  if (++currentSongIndex >= songs.length) currentSongIndex = 0; // Si no existe, la primera
+  const nextSong = songs[currentSongIndex];
+  audio.src = nextSong.url;
+  changeSong(nextSong);
 }
 
-// play previous song
+// Canción anterior
 function prev() {
-  const currentSong = songs[currentSongIndex];
-  const prevSong = songs[currentSongIndex - 1];
-  if (prevSong) {
-    audio.src = prevSong.file;
-    cover.style.backgroundImage = `url(${prevSong.cover})`;
-    info.innerHTML = `<h3>${prevSong.title}</h3>
-    <h4>${prevSong.artist}</h4>`;
-    playBtn.innerHTML = "play";
-    currentSongIndex--;
-  } else {
-    audio.src = songs[songs.length - 1].file;
-    cover.style.backgroundImage = `url(${songs[songs.length - 1].cover})`;
-    info.innerHTML = `<h3>${songs[songs.length - 1].title}</h3>
-    <h4>${songs[songs.length - 1].artist}</h4>`;
-    playBtn.innerHTML = "play";
-    currentSongIndex = songs.length - 1;
-  }
+  if (--currentSongIndex < 0) currentSongIndex = songs.length - 1; // Si no existe, la última
+  const prevSong = songs[currentSongIndex];
+  audio.src = prevSong.url;
+  changeSong(prevSong);
 }
 
-// update progress bar
+// Cambia la canción
+function changeSong(newSong) {
+  updateVisibility(false);
+  loadSong(newSong);
+  audio.play();
+}
+
+// Permite cambiar la barra de progreso
 function updateProgress(e) {
   const width = progress.clientWidth;
   const clickX = e.offsetX;
   const duration = audio.duration;
-  e.target.value = (clickX / width) * 100;
 
+  bar.style.width = `${(clickX / width) * 100}%`;
   audio.currentTime = (clickX / width) * duration;
 }
 
+// Pinta las barritas y las marcas de tiempo
 function drawCoverInfo() {
   if (!audio.paused) {
     drawMinutes();
@@ -114,14 +90,13 @@ function drawCoverInfo() {
   }
 }
 
+// Pinta las marcas de tiempo
 function drawMinutes() {
   const duration = audio.duration;
   const currentTime = audio.currentTime;
-  const progressValue = (currentTime / duration) * 100;
   if (currentTime > 0) { // No establecer si progressValue es Infinity
-    progress.value = progressValue;
+    bar.style.width = `${(currentTime / duration) * 100}%`;
   }
-
   const minutes = String(Math.floor(currentTime / 60)).padStart(2, "0");
   const seconds = String(Math.floor(currentTime % 60)).padStart(2, "0");
   const minutesTotal = String(Math.floor(duration / 60)).padStart(2, "0");
@@ -129,9 +104,10 @@ function drawMinutes() {
   const currentTimeString = `${minutes}:${seconds}`;
   const durationString = `${minutesTotal}:${secondsTotal}`;
   current.innerHTML = currentTimeString;
-  total.innerHTML = durationString;
+  total.innerHTML = isNaN(duration) ? "" : durationString;
 }
 
+// Crea los div de las líneas (una vez)
 function createLines() {
   const width = lines.clientWidth;
   const lineWidth = width / (LINE_NUMBER * 1.5);
@@ -145,6 +121,7 @@ function createLines() {
   }
 }
 
+// Anima las líneas
 function drawLines() {
   lines.style.display = "flex";
   const allLines = lines.querySelectorAll(".line");
@@ -155,9 +132,12 @@ function drawLines() {
   });
 }
 
-function updateVisibility(isPlaying = true) {
-  console.log(isPlaying);
-  [lines, current, total].forEach((element) => {
-    element.style.opacity = isPlaying ? 1 : 0;
+// Muestra u oculta elementos
+function updateVisibility() {
+  playBtn.style.display = audio.paused ? "inherit" : "none";
+  pauseBtn.style.display = !audio.paused ? "inherit" : "none";
+
+  HIDE_ON_PAUSE.forEach((element) => {
+    element.style.opacity = audio.paused ? 0 : 1;
   });
 }
