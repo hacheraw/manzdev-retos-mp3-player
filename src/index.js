@@ -78,7 +78,7 @@ function loadSong(song) {
   listItems.forEach((item) => { item.classList.remove("active"); });
   listItems[currentSongIndex].classList.add("active");
   audio.src = song.url;
-  cover.style.backgroundImage = `url(./assets/covers/${song.image})`;
+  cover.style.backgroundImage = `url(./covers/${song.image})`;
   title.textContent = song.title;
   artist.textContent = song.artist;
   lyrics.textContent = song.lyrics;
