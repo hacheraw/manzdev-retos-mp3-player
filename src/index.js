@@ -5,12 +5,12 @@ const LINE_NUMBER = 50;
 const player = document.querySelector(".player");
 const audio = player.querySelector("audio");
 const cover = player.querySelector(".cover");
-const info = player.querySelector(".info");
+// const info = player.querySelector(".info");
 const title = player.querySelector(".title");
 const artist = player.querySelector(".artist");
 const prevBtn = player.querySelector(".prev");
 const playBtn = player.querySelector(".play");
-const pauseBtn = document.querySelector(".pause");
+const pauseBtn = player.querySelector(".pause");
 const nextBtn = player.querySelector(".next");
 const lyrics = player.querySelector(".lyrics");
 const progress = player.querySelector(".progress");
@@ -19,8 +19,8 @@ const current = player.querySelector(".current-time");
 const total = player.querySelector(".total-time");
 const lines = player.querySelector(".lines");
 const listDiv = document.querySelector(".playlist");
-const loopBtn = document.querySelector(".loop");
-const listBtn = document.querySelector(".list");
+const loopBtns = document.querySelectorAll(".loop");
+const listBtns = document.querySelectorAll(".list");
 
 const HIDE_ON_PAUSE = [lines/*, current, total */]; // Elementos que se ocultarán al pausar
 let LOOP = false; // por defecto no se hace loop
@@ -45,8 +45,19 @@ audio.addEventListener("timeupdate", drawCoverInfo);
 audio.addEventListener("play", () => { updateVisibility(true); });
 audio.addEventListener("pause", () => { updateVisibility(false); });
 audio.addEventListener("ended", () => { updateVisibility(false); next(); });
-loopBtn.addEventListener("click", () => { LOOP = !LOOP; });
-listBtn.addEventListener("click", () => { listDiv.classList.toggle("show"); });
+loopBtns.forEach(btn =>
+  btn.addEventListener("click", () => {
+    LOOP = !LOOP;
+    loopBtns.forEach(btn => btn.classList.toggle("hide"));
+    updateVisibility();
+  })
+);
+listBtns.forEach(btn =>
+  btn.addEventListener("click", () => {
+    listDiv.classList.toggle("show");
+    listBtns.forEach(btn => btn.classList.toggle("hide"));
+  })
+);
 
 // Genera la playlist
 function generatePlaylist() {
@@ -171,4 +182,7 @@ function updateVisibility() {
   HIDE_ON_PAUSE.forEach((element) => {
     element.style.opacity = audio.paused ? 0 : 1;
   });
+
+  nextBtn.style.color = !LOOP && (currentSongIndex === songs.length - 1) ? "grey" : "currentColor";
+  prevBtn.style.color = !LOOP && (currentSongIndex === 0) ? "grey" : "currentColor";
 }

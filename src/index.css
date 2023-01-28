@@ -18,6 +18,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
     text-align: center;
     width: 350px;
     background: #fff;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
 
     & .cover {
       position: relative;
@@ -147,10 +149,19 @@ body {
     justify-content: space-between;
     width: 100%;
 
-    & > button {
+    & > svg {
+      color: #fffd;
       margin: 1rem;
+
+      &.hide {
+        display: none;
+      }
     }
   }
+}
+
+.btn {
+  cursor: pointer;
 }
 
 .fancy-text {
