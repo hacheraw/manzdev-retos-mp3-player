@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MP3 Player</title>
+  
+  
+  <script type="module" crossorigin src="/manzdev-retos-mp3-player/index.3d88a90d.js"></script>
+  <link rel="stylesheet" href="/manzdev-retos-mp3-player/index.50d58a1e.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="player">
+      <audio src="">
+        Tu navegador no soporta etiquetas "audio"
+      </audio>
+      <div class="cover">
+
+        <div class="lines"></div>
+        <div class="current-time"></div>
+        <div class="total-time"></div>
+      </div>
+      <div class="info">
+        <h1 class="title"></h1>
+        <h2 class="artist"></h2>
+      </div>
+      <div class="controls">
+        <svg xmlns="http://www.w3.org/2000/svg" class="btn prev" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M20 5v14l-12 -7z" fill="currentColor" />
+          <path d="M4 5l0 14" />
+        </svg>
+        <img src="/manzdev-retos-mp3-player/player-play-filled.c93e8a03.svg" class="btn play" alt="Reproducción">
+        <img src="/manzdev-retos-mp3-player/player-pause-filled.c265d7d8.svg" class="btn pause" alt="Pausa">
+        <svg xmlns="http://www.w3.org/2000/svg" class="btn next" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 5v14l12 -7z" fill="currentColor" />
+          <path d="M20 5l0 14" />
+        </svg>
+      </div>
+      <div class="lyrics"></div>
+      <div class="progress"><div class="bar"></div></div>
+    </div>
+    <div class="list-buttons">
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn loop on hide" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M4 12v-3a3 3 0 0 1 3 -3h13m-3 -3l3 3l-3 3" />
+        <path d="M20 12v3a3 3 0 0 1 -3 3h-13m3 3l-3 -3l3 -3" />
+      </svg>      
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn loop off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M4 12v-3c0 -1.336 .873 -2.468 2.08 -2.856m3.92 -.144h10m-3 -3l3 3l-3 3" />
+        <path d="M20 12v3a3 3 0 0 1 -.133 .886m-1.99 1.984a3 3 0 0 1 -.877 .13h-13m3 3l-3 -3l3 -3" />
+        <path d="M3 3l18 18" />
+      </svg>      
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn list open" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M14 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M17 17v-13h4" />
+        <path d="M13 5h-10" />
+        <path d="M3 9l10 0" />
+        <path d="M9 13h-6" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn list close hide" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M19 8h-14" />
+        <path d="M5 12h7" />
+        <path d="M12 16h-7" />
+        <path d="M16 14l4 4" />
+        <path d="M20 14l-4 4" />
+      </svg>
+    </div>
+    <div class="playlist">
+    </div>
+  </div>
+</body>
+
+</html>
